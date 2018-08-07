@@ -2,3 +2,6 @@
 	path = pyimgui
 	url = https://github.com/swistakm/pyimgui.git
 	ignore = dirty
+[submodule "imgui_software_renderer"]
+	path = imgui_software_renderer
+	url = https://github.com/emilk/imgui_software_renderer.git
