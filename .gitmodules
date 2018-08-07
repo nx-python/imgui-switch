@@ -1,0 +1,4 @@
+[submodule "pyimgui"]
+	path = pyimgui
+	url = https://github.com/swistakm/pyimgui.git
+	ignore = dirty
