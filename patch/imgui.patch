@@ -1,6 +1,6 @@
 diff -Naur --exclude=.git imgui_orig/imgui_demo.cpp imgui/imgui_demo.cpp
---- imgui_orig/imgui_demo.cpp	2018-08-08 16:16:43.000000000 +0600
-+++ imgui/imgui_demo.cpp	2018-08-08 00:36:47.000000000 +0600
+--- imgui_orig/imgui_demo.cpp	2018-08-08 19:52:00.000000000 +0600
++++ imgui/imgui_demo.cpp	2018-08-08 19:41:40.000000000 +0600
 @@ -28,6 +28,7 @@
  #include <math.h>           // sqrtf, powf, cosf, sinf, floorf, ceilf
  #include <stdio.h>          // vsnprintf, sscanf, printf
