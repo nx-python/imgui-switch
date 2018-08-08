@@ -1,0 +1,11 @@
+diff -Naur --exclude=.git imgui_orig/imgui_demo.cpp imgui/imgui_demo.cpp
+--- imgui_orig/imgui_demo.cpp	2018-08-08 16:16:43.000000000 +0600
++++ imgui/imgui_demo.cpp	2018-08-08 00:36:47.000000000 +0600
+@@ -28,6 +28,7 @@
+ #include <math.h>           // sqrtf, powf, cosf, sinf, floorf, ceilf
+ #include <stdio.h>          // vsnprintf, sscanf, printf
+ #include <stdlib.h>         // NULL, malloc, free, atoi
++#include <climits>
+ #if defined(_MSC_VER) && _MSC_VER <= 1500 // MSVC 2008 or earlier
+ #include <stddef.h>         // intptr_t
+ #else
