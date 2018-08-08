@@ -1,1 +1,1 @@
-# switch-imgui
+# Switch Imgui
