@@ -1,2 +1,4 @@
-pyimgui-orig/
+pyimgui_orig/
+imgui_orig/
+.bootstrapped
 .DS_Store

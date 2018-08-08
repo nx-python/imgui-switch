@@ -1,0 +1,2 @@
+imguihelper -I$(srcdir)/Modules/imguihelper imguihelper/imguihelper.cpp imguihelper/imgui/imgui_sw.cpp imguihelper/imgui/imgui.cpp imguihelper/imgui/imgui_demo.cpp imguihelper/imgui/imgui_draw.cpp
+__cwrap_pyimgui_core -I$(srcdir)/Modules -I$(srcdir)/Modules/imguihelper/imgui __cwrap_pyimgui_core.cpp
