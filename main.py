@@ -1,9 +1,11 @@
 import imgui
+import imguihelper
 import os
 import _nx
 import runpy
 import sys
 from imgui.integrations.nx import NXRenderer
+from nx.utils import clear_terminal
 
 sys.argv = [""]  # workaround needed for runpy
 
@@ -20,11 +22,15 @@ FILE_COLOR = colorToFloat((41, 128, 185))
 
 
 TILED_DOUBLE = 1
-LINEAR_DOUBLE = 0
 def run_python_module(path: str):
+    # clear both buffers
+    imguihelper.clear()
+    imguihelper.clear()
     _nx.gfx_set_mode(TILED_DOUBLE)
+    clear_terminal()
     runpy.run_path(path, run_name='__main__')
-    _nx.gfx_set_mode(LINEAR_DOUBLE)
+    # _nx.gfx_set_mode(LINEAR_DOUBLE)
+    imguihelper.initialize()
 
 def main():
     renderer = NXRenderer()
