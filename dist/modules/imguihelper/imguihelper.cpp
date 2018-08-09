@@ -105,6 +105,31 @@ imguihelper_render(PyObject *self, PyObject *args)
 
     // overlay the GUI
     imgui_sw::paint_imgui(pixel_buffer->data(), width, height);
+    framebuf = (u32*) gfxGetFramebuffer((u32*)&width, (u32*)&height);
+
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            u32 pos = i * width + j;
+            framebuf[pos] = pixel_buffer->data()[pos];
+        }
+    }
+
+    gfxFlushBuffers();
+    gfxSwapBuffers();
+    gfxWaitForVsync();
+
+    Py_RETURN_NONE;
+}
+
+
+PyDoc_STRVAR(imguihelper_clear_doc, "Clears the screen");
+
+static PyObject *
+imguihelper_clear(PyObject *self, PyObject *args)
+{
+    // fill black
+    std::fill_n(pixel_buffer->data(), width * height, 0);
+    framebuf = (u32*) gfxGetFramebuffer((u32*)&width, (u32*)&height);
 
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
@@ -140,6 +165,7 @@ static PyMethodDef module_methods[] = {
     {"initialize", imguihelper_initialize, METH_NOARGS, imguihelper_initialize_doc},
     {"handleinputs", imguihelper_handleinputs, METH_NOARGS, imguihelper_handleinputs_doc},
     {"render", imguihelper_render, METH_NOARGS, imguihelper_render_doc},
+    {"clear", imguihelper_clear, METH_NOARGS, imguihelper_clear_doc},
     {"shutdown", imguihelper_shutdown, METH_NOARGS, imguihelper_shutdown_doc},
     {NULL, NULL}
 };
