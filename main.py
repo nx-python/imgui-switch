@@ -7,6 +7,7 @@ import sys
 import time
 from imgui.integrations.nx import NXRenderer
 from nx.utils import clear_terminal
+import traceback
 
 sys.argv = [""]  # workaround needed for runpy
 
@@ -21,9 +22,11 @@ FOLDER_COLOR = colorToFloat((230, 126, 34))
 PYFILE_COLOR = colorToFloat((46, 204, 113))
 FILE_COLOR = colorToFloat((41, 128, 185))
 
+ERROR = ""
 
 TILED_DOUBLE = 1
 def run_python_module(path: str):
+    global ERROR
     # clear both buffers
     imguihelper.clear()
     imguihelper.clear()
@@ -31,11 +34,13 @@ def run_python_module(path: str):
     clear_terminal()
     try:
         runpy.run_path(path, run_name='__main__')
-    except Exception:
-        time.sleep(60)
+    except Exception as e:
+        ERROR = traceback.format_exc()
     imguihelper.initialize()
 
+
 def main():
+    global ERROR
     renderer = NXRenderer()
     currentDir = os.getcwd()
 
@@ -91,6 +96,16 @@ def main():
         
         imgui.end()
 
+        if ERROR:
+            imgui.set_next_window_size(width, height)
+            imgui.set_next_window_position(0, 0)
+            imgui.begin("ERROR", 
+                flags=imgui.WINDOW_NO_RESIZE | imgui.WINDOW_NO_MOVE | imgui.WINDOW_NO_SAVED_SETTINGS
+            )
+            imgui.text(str(ERROR))
+            if imgui.button("OK", width=200, height=60):
+                ERROR = ""
+            imgui.end()
 
         imgui.render()
         renderer.render()
@@ -99,4 +114,11 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception:
+        imguihelper.clear()
+        imguihelper.clear()
+        _nx.gfx_set_mode(TILED_DOUBLE)
+        clear_terminal()
+        traceback.print_exc()
