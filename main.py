@@ -4,6 +4,7 @@ import os
 import _nx
 import runpy
 import sys
+import time
 from imgui.integrations.nx import NXRenderer
 from nx.utils import clear_terminal
 
@@ -28,8 +29,10 @@ def run_python_module(path: str):
     imguihelper.clear()
     _nx.gfx_set_mode(TILED_DOUBLE)
     clear_terminal()
-    runpy.run_path(path, run_name='__main__')
-    # _nx.gfx_set_mode(LINEAR_DOUBLE)
+    try:
+        runpy.run_path(path, run_name='__main__')
+    except Exception:
+        time.sleep(60)
     imguihelper.initialize()
 
 def main():
